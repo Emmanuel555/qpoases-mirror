@@ -34,6 +34,8 @@
 
 #include <qpOASES/Utils.hpp>
 
+namespace qpOASES { // as it should have been!!!
+
 
 extern "C" void dgemm_(	const char* TRANSA, const char* TRANSB,
 						const la_uint_t* M, const la_uint_t* N, const la_uint_t* K,
@@ -143,4 +145,6 @@ extern "C" void sgemm_(	const char* TRANSA, const char* TRANSB,
 				for (j = 0; j < *M; j++)
 					for (i = 0; i < *K; i++)
 						C[j+(*LDC)*k] += *ALPHA * A[i+(*LDA)*j] * B[i+(*LDB)*k];
+}
+
 }

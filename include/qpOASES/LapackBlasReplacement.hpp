@@ -40,7 +40,7 @@
 #ifdef __USE_SINGLE_PRECISION__
 
 	/** Macro for calling level 3 BLAS operation in single precision. */
-	#define GEMM sgemm_
+	#define GEMM qpOASES::sgemm_
 	/** Macro for calling level 3 BLAS operation in single precision. */
 	#define SYR ssyr_
 	/** Macro for calling level 3 BLAS operation in single precision. */
@@ -60,7 +60,7 @@
 #else
 
 	/** Macro for calling level 3 BLAS operation in double precision. */
-	#define GEMM dgemm_
+	#define GEMM qpOASES::dgemm_
 	/** Macro for calling level 3 BLAS operation in double precision. */
 	#define SYR  dsyr_
 	/** Macro for calling level 3 BLAS operation in double precision. */
@@ -80,8 +80,9 @@
 #endif /* __USE_SINGLE_PRECISION__ */
 
 
-extern "C"
-{
+namespace qpOASES {
+extern "C" {
+
 	/** Performs one of the matrix-matrix operation in double precision. */
 	void dgemm_(	const char*, const char*, const la_uint_t*, const la_uint_t*, const la_uint_t*,
 					const double*, const double*, const la_uint_t*, const double*, const la_uint_t*,
@@ -90,6 +91,11 @@ extern "C"
 	void sgemm_(	const char*, const char*, const la_uint_t*, const la_uint_t*, const la_uint_t*,
 					const float*, const float*, const la_uint_t*, const float*, const la_uint_t*,
 					const float*, float*, const la_uint_t* );
+}
+}
+
+extern "C"
+{
 
 	/** Performs a symmetric rank 1 operation in double precision. */
 	void dsyr_(		const char*, const la_uint_t*, const double*, const double*,
