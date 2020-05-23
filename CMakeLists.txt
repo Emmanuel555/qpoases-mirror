@@ -40,6 +40,9 @@ SET(PACKAGE_AUTHOR "Hans Joachim Ferreau, Andreas Potschka, Christian Kirches et
 SET(PACKAGE_MAINTAINER "Hans Joachim Ferreau, Andreas Potschka, Christian Kirches et al.")
 SET(PACKAGE_URL "https://projects.coin-or.org/qpOASES")
 
+find_package(BLAS REQUIRED)
+find_package(LAPACK REQUIRED)
+
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/libs)
 
@@ -105,6 +108,7 @@ FILE(GLOB SRC src/*.cpp)
 
 # library
 ADD_LIBRARY(qpOASES STATIC ${SRC})
+TARGET_LINK_LIBRARIES(qpOASES PUBLIC ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES})
 INSTALL(TARGETS qpOASES
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
